@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prima visita psichiatrica</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">Ψ</span>
+      <div>
+        <h1>Prima visita psichiatrica</h1>
+        <p class="patient-label" id="patientLabel">Nuova visita</p>
+      </div>
+    </div>
+    <div class="actions">
+      <label class="autosave" title="Salva automaticamente la bozza in questo browser">
+        <input type="checkbox" id="autosaveToggle"> Salvataggio automatico
+      </label>
+      <button type="button" class="btn ghost" id="btnNew">Nuova visita</button>
+      <button type="button" class="btn ghost" id="btnSave">Salva bozza</button>
+      <button type="button" class="btn ghost" id="btnLoad">Apri bozza</button>
+      <input type="file" id="fileLoad" accept=".json,application/json" hidden>
+      <button type="button" class="btn primary" id="btnReport">Genera referto</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" id="sidebar" aria-label="Sezioni"></nav>
+    <main>
+      <form id="visitForm" autocomplete="off" novalidate></form>
+      <footer class="refs">
+        <strong>Riferimenti per la struttura dell'intervista</strong>
+        <ul>
+          <li>American Psychiatric Association. <em>Practice Guideline for the Psychiatric Evaluation of Adults</em>, 3rd ed., 2016.</li>
+          <li>NICE NG225. <em>Self-harm: assessment, management and preventing recurrence</em>, 2022.</li>
+          <li>NICE CG136. <em>Service user experience in adult mental health</em>, 2011 (agg.).</li>
+          <li>Royal College of Psychiatrists. <em>Good Psychiatric Practice</em> (CR154).</li>
+          <li>Società Italiana di Psichiatria – documenti di consenso sulla valutazione clinica, sul rischio suicidario e sul monitoraggio della salute fisica.</li>
+        </ul>
+        <p>I dati inseriti restano nel browser e non vengono trasmessi ad alcun server.</p>
+      </footer>
+    </main>
+  </div>
+
+  <dialog id="reportDialog" class="report-dialog">
+    <div class="report-toolbar">
+      <div>
+        <strong>Bozza del referto</strong>
+        <span class="hint">Il testo è modificabile direttamente prima dell'esportazione.</span>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn ghost" id="btnRegen" title="Rigenera dal form (annulla le modifiche manuali)">Rigenera</button>
+        <button type="button" class="btn" id="btnDocx">Scarica Word (.docx)</button>
+        <button type="button" class="btn" id="btnPdf">Stampa / PDF</button>
+        <button type="button" class="btn ghost" id="btnClose">Chiudi</button>
+      </div>
+    </div>
+    <div class="report-scroll">
+      <article id="reportPreview" class="report-page" contenteditable="true" spellcheck="true"></article>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/schema.js"></script>
+  <script src="js/docx.js"></script>
+  <script src="js/report.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
